@@ -37,6 +37,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #if defined _WIN32
 # define WIN32_LEAN_AND_MEAN
 # include <windows.h>
+#else
+# include <glob.h>
 #endif
 
 #define INSTALLPATHLEN (sizeof(INSTALLPATH) - 1)
@@ -101,6 +103,22 @@ char *searchpath(const char *name, const char *pathp)
   }
   // Secondly, try the current directory.
   // Now search along PATHP.
+#ifndef _WIN32
+  // Fluffy: an element of PATHP may have a whole '*' component, as in
+  // /sw/*/bin, which execvp expands with glob's GLOB_PATHS search list.
+  // Search it the same way: "{PATHP}/NAME" gives each element's NAME
+  // that exists, in the order execvp tries them.
+  char *pattern = new char[strlen(pathp) + strlen(name) + 4];
+  sprintf(pattern, "{%s}/%s", pathp, name);
+  glob_t gl;
+  path = 0;
+  if (glob(pattern, GLOB_PATHS, 0, &gl) == 0) {
+    path = strsave(gl.gl_pathv[0]);
+    globfree(&gl);
+  }
+  delete[] pattern;
+  return path;
+#else
   size_t namelen = strlen(name);
   char *p = (char *)pathp;
   for (;;) {
@@ -128,6 +146,7 @@ char *searchpath(const char *name, const char *pathp)
     p = end + 1;
   }
   return 0;
+#endif
 }
 
 // Search NAME along PATHP with the elements of PATHEXT in turn added.
