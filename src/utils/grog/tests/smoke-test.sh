@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/sw/bash/bin/bash
 #
 # Copyright 2021 G. Branden Robinson
 #
