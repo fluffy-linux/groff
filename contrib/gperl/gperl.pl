@@ -1,4 +1,4 @@
-#!/usr/bin/env perl
+#!/sw/perl/bin/perl
 
 # gperl - preprocess troff(1) input to execute embedded Perl code
 #

@@ -1,4 +1,4 @@
-#!/usr/bin/env perl
+#!/sw/perl/bin/perl
 
 # gpinyin - use Hanyu Pinyin romanization of Chinese in groff(1) input
 #
