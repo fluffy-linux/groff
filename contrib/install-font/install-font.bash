@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/sw/bash/bin/bash
 #
 # Copyright 2024 Peter Schaffter
 #

@@ -22,7 +22,7 @@
 
 # The following line is required for DOS/Windows systems, since
 # this Makefile needs a Unixy shell to run.
-SHELL = /bin/sh
+SHELL = /sw/bash/bin/bash
 
 # Directory containing AFM files.  Must not be current directory.
 # Either long names (e.g., Times-Roman.afm) or short names (e.g.,

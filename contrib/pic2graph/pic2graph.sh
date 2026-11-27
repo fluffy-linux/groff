@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/sw/bash/bin/bash
 #
 # pic2graph -- compile PIC image descriptions to bitmap images
 #
